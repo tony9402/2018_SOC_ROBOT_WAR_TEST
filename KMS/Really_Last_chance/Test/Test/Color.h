@@ -1,5 +1,6 @@
 #pragma once
 
+#pragma region DONT_TOUCH
 //#define IMAGE_SCALE_640_480
 #define IMAGE_SCALE_320_240
 
@@ -458,30 +459,42 @@ void ColorFilitering()
 	return;
 #pragma endregion
 }
-
+#pragma endregion
 bool IsPocarIColor(short i, short j)
 {
+	
 	if (mHSV[i][j][H] >= 150 && mHSV[i][j][H] <= 165)
-		if (mHSV[i][j][S] >= 150)
+		if (mHSV[i][j][V] >= 240)
+		{
+			if (mHSV[i][j][S] >= 100)
+			{
+				return true;
+			}
+		}else if (mHSV[i][j][S] >= 150)
 			return true;
-		return false;
 	return false;
 }
 
 bool IsCantataColor(short i, short j)
 {
-	if (mHSV[i][j][H] >= 240 || mHSV[i][j][H] <= 10)
-		if(mHSV[i][j][S] > 150)
+	if (mHSV[i][j][H] >= 240 || mHSV[i][j][H] <= 13)
+		if(mHSV[i][j][S] > 170)
 			return true;
-		return false;
 	return false;
 }
 
 bool IsPocaColor(short i, short j)
 {
-	if (mHSV[i][j][H] >= 25 && mHSV[i][j][H] <= 50)
+	if (mHSV[i][j][H] >= 35 && mHSV[i][j][H] <= 50)
 		if (mHSV[i][j][S] > 170)
 			return true;
-		return false;
+	return false;
+}
+
+bool IsWheelColor(short i, short j)
+{
+	if (mHSV[i][j][H] >= 65 && mHSV[i][j][H] <= 110)
+		if (mHSV[i][j][S] > 70)
+			return true;
 	return false;
 }
